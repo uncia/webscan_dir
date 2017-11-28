@@ -17,6 +17,9 @@ Example:webscan_dir.py -u http://192.168.1.1/ -t 50 -f php,dir -n 403 \n \
 -n     Example:-n 403,301   You don't want the tools to detect the status code default 503|404|400 \n \
 -h     help
 
+## 2017年11月28日
+## 更新带端口的时候无法保存成文件的bug。
+## 增加返回页面内容长度统计，方便查看。
 ##  因为test404那个扫描工具需要强制联网更新，看着不爽就随便用python写写自己用的，不好用请换其它工具，看心情优化更新
 ## -t 可自定义线程 默认线程50
 ## -u 指定url 

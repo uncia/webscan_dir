@@ -14,7 +14,7 @@ from urlparse import *
 
 def savehtml():
     parsed_uri = urlparse(argv_url)
-    domain = '{uri.netloc}'.format(uri=parsed_uri)
+    domain = '{uri.netloc}'.format(uri=parsed_uri).replace(':','_')
     f = open(domain+".html",'w')
     f.write(''.join(save_urllist))
     f.close()
@@ -26,11 +26,11 @@ def http_(url_):
     headers = {'Referer': 'http://baidu.com','User-Agent': User_Agent,}
     url_=urllib.quote(url_, safe=string.printable)
     try:
-        htmlcode = requests.get(url=url_.decode('utf-8'),headers=headers,allow_redirects=False,timeout=10).status_code
-        
+        html = requests.get(url=url_.decode('utf-8'),headers=headers,allow_redirects=False,timeout=10)
+        htmlcode=html.status_code
         if(str(htmlcode) not in notcode_list):
-            print url_+'\t'+str(htmlcode).decode('utf-8')
-            save_urllist.append('<a href='+url_+'>'+url_+'<a>&nbsp;&nbsp;&nbsp;&nbsp;'+str(htmlcode)+'<br>')
+            print url_+'\t status_code: '+str(htmlcode).decode('utf-8')+'\t len: '+str(len(html.text))
+            save_urllist.append('<a href='+url_+'>'+url_+'<a>&nbsp;&nbsp;&nbsp;&nbsp;status_code：'+str(htmlcode)+'&nbsp;&nbsp;&nbsp;&nbsp;len：'+str(len(html.text))+'<br>')
     except :
         pass
 
